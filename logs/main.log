@@ -1,0 +1,9 @@
+{"level":"fatal","msg":"open sms.data: no such file or directory","time":"2023-02-23T16:36:10+03:00"}
+{"level":"fatal","msg":"open sms.data: no such file or directory","time":"2023-02-23T16:37:07+03:00"}
+{"level":"fatal","msg":"open sms.data: no such file or directory","time":"2023-02-23T16:37:32+03:00"}
+{"level":"fatal","msg":"open email.data: no such file or directory","time":"2023-02-23T16:37:49+03:00"}
+{"level":"fatal","msg":"open email.data: no such file or directory","time":"2023-02-23T16:38:26+03:00"}
+{"level":"fatal","msg":"open email.data: no such file or directory","time":"2023-02-23T16:40:54+03:00"}
+{"level":"fatal","msg":"open email.data: no such file or directory","time":"2023-02-23T16:48:26+03:00"}
+{"level":"fatal","msg":"open email.data: no such file or directory","time":"2023-02-23T16:50:12+03:00"}
+{"level":"fatal","msg":"open helloemail.data: no such file or directory","time":"2023-02-23T16:50:49+03:00"}
