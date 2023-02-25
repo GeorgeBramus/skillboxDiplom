@@ -22,7 +22,7 @@ type Simulator struct {
 // New - создание Симулятора. Установим директорию по умолчанию.
 func New() Simulator {
 	viper := viper.New()
-	viper.SetConfigFile("../config/config.yml")
+	viper.SetConfigFile("../data/config/config.yml")
 	viper.ReadInConfig()
 
 	directory := viper.GetString("simulator.directory")
