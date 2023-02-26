@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"diplom/pkg/data"
 	"diplom/pkg/simulator"
@@ -16,6 +17,17 @@ func main() {
 	// [?] Двубуквенные коды для обозначения страны
 	codes := data.GetAlphaCodes()
 
+	p := "Gmail"
+	providers := data.GetNameProviders()
+	if strings.Contains(providers[p], ",") {
+		services := strings.Split(providers[p], ",")
+		fmt.Println("Один сервис:", services[0])
+		fmt.Println("Другой сервис:", services[1])
+	} else {
+		fmt.Println("Этот оператор относится только к одному сервису:", providers[p])
+	}
+
+	fmt.Printf("\n\n")
 	fmt.Println(codes["RU"])
 	fmt.Println(string(contentSms))
 }
