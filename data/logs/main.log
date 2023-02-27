@@ -7,3 +7,15 @@
 {"level":"fatal","msg":"open email.data: no such file or directory","time":"2023-02-23T16:48:26+03:00"}
 {"level":"fatal","msg":"open email.data: no such file or directory","time":"2023-02-23T16:50:12+03:00"}
 {"level":"fatal","msg":"open helloemail.data: no such file or directory","time":"2023-02-23T16:50:49+03:00"}
+{"level":"fatal","msg":"open ../../simulator/sms.data: no such file or directory","time":"2023-02-27T13:01:14+03:00"}
+{"level":"fatal","msg":"open ../../simulator/sms.data: no such file or directory","time":"2023-02-27T13:08:10+03:00"}
+{"level":"fatal","msg":"open ../../simulator/sms.data: no such file or directory","time":"2023-02-27T13:13:15+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T13:15:26+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T13:18:45+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T13:20:06+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T13:20:15+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T13:20:29+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T13:20:38+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T13:20:43+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T15:05:38+03:00"}
+{"level":"fatal","msg":"Error while reading file: read ../data/standarts/ISO_3166-1.csv: file already closed","time":"2023-02-27T15:13:35+03:00"}

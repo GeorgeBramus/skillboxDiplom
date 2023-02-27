@@ -1,69 +1,53 @@
 package data
 
 import (
-	"encoding/csv"
-	"io"
+	"bufio"
 	"os"
+	"strings"
 
-	"github.com/gocarina/gocsv"
+	"diplom/pkg/logs"
+
+	log "github.com/sirupsen/logrus"
 )
 
-type Alpha2 struct {
-	Code    string `csv:"code"`
-	Country string `csv:"country"`
-}
+type Codes struct{}
+type Providers struct{}
 
-type Providers struct {
-	Name    string `csv:"name"`
-	Service string `csv:"service"`
+type SourceData interface {
+	FileName() string
 }
 
 func init() {
-	gocsv.SetCSVReader(func(in io.Reader) gocsv.CSVReader {
-		r := csv.NewReader(in)
-		r.Comma = ';'
-		return r
-	})
+	logs.InitialSet("main")
 }
 
-func GetAlphaCodes() map[string]string {
-	iso, err := os.OpenFile("../data/standarts/ISO_3166-1.csv", os.O_RDWR|os.O_CREATE, os.ModePerm)
+// CreateMap - Возвращает мапу с сырыми данными
+func CreateMap(s SourceData) map[string]string {
+	file, err := os.Open(s.FileName())
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	defer iso.Close()
+	defer file.Close()
 
-	codeAlpha := []*Alpha2{}
-
-	if err := gocsv.UnmarshalFile(iso, &codeAlpha); err != nil {
-		panic(err)
-	}
-
+	fileScanner := bufio.NewScanner(file)
+	fileScanner.Split(bufio.ScanLines)
 	codMap := make(map[string]string)
-	for _, code := range codeAlpha {
-		codMap[code.Code] = code.Country
+
+	var lines []string
+	for fileScanner.Scan() {
+		lines = strings.Split(fileScanner.Text(), ";")
+		codMap[lines[0]] = lines[1]
 	}
 
 	return codMap
 }
 
-func GetNameProviders() map[string]string {
-	providers, err := os.OpenFile("../data/standarts/providers.csv", os.O_RDWR|os.O_CREATE, os.ModePerm)
-	if err != nil {
-		panic(err)
-	}
-	defer providers.Close()
+// FileName - Возвращает имя файла, в котором сырые данные
+func (c Codes) FileName() string {
+	return "../data/standarts/ISO_3166-1.csv"
+}
 
-	nameProviders := []*Providers{}
-
-	if err := gocsv.UnmarshalFile(providers, &nameProviders); err != nil {
-		panic(err)
-	}
-
-	providersMap := make(map[string]string)
-	for _, provider := range nameProviders {
-		providersMap[provider.Name] = provider.Service
-	}
-
-	return providersMap
+// FileName - Возвращает имя файла, в котором сырые данные
+func (p Providers) FileName() string {
+	return "../data/standarts/providers.csv"
 }

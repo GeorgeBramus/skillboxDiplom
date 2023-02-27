@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 
 	"diplom/pkg/data"
 	"diplom/pkg/simulator"
@@ -14,20 +13,15 @@ func main() {
 	contentSms := simulator.ReadFile("sms.data")
 
 	// Формирование мапы с кодами Alpha-2 по стандарту ISO 3166-1
-	// [?] Двубуквенные коды для обозначения страны
-	codes := data.GetAlphaCodes()
+	sourceCodes := data.Codes{}
+	codes := data.CreateMap(sourceCodes)
+	// Формируем мапу с именами провайдеров
+	sourceProviders := data.Providers{}
+	providers := data.CreateMap(sourceProviders)
 
-	p := "Gmail"
-	providers := data.GetNameProviders()
-	if strings.Contains(providers[p], ",") {
-		services := strings.Split(providers[p], ",")
-		fmt.Println("Один сервис:", services[0])
-		fmt.Println("Другой сервис:", services[1])
-	} else {
-		fmt.Println("Этот оператор относится только к одному сервису:", providers[p])
-	}
+	fmt.Println(providers["Topolo"])
+	fmt.Println(codes["KZ"])
 
-	fmt.Printf("\n\n")
-	fmt.Println(codes["RU"])
+	fmt.Println()
 	fmt.Println(string(contentSms))
 }
