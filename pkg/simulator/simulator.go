@@ -1,8 +1,7 @@
 package simulator
 
 import (
-	"io"
-	"io/ioutil"
+	"bufio"
 	"os"
 
 	"diplom/pkg/logs"
@@ -35,7 +34,7 @@ func New() Simulator {
 
 // ReadFile - чтение файла в директории симулятора
 // и возврат содержимого указанного файла.
-func (s *Simulator) ReadFile(name string) []byte {
+func (s *Simulator) ReadFile(name string) []string {
 	f := s.Directory + name
 	file, err := os.Open(f)
 	if err != nil {
@@ -43,10 +42,20 @@ func (s *Simulator) ReadFile(name string) []byte {
 	}
 	defer file.Close()
 
-	content, err := ioutil.ReadFile(f)
-	if err != nil && err != io.EOF {
-		log.Fatal(err)
+	// content, err := ioutil.ReadFile(f)
+	// if err != nil && err != io.EOF {
+	// 	log.Fatal(err)
+	// }
+
+	// return content
+
+	fileScanner := bufio.NewScanner(file)
+	fileScanner.Split(bufio.ScanLines)
+
+	var lines []string
+	for fileScanner.Scan() {
+		lines = append(lines, fileScanner.Text())
 	}
 
-	return content
+	return lines
 }

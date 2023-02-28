@@ -42,12 +42,12 @@ func CreateMap(s SourceData) map[string]string {
 	return codMap
 }
 
-// FileName - Возвращает имя файла, в котором сырые данные
+// Codes.FileName - Возвращает имя файла, в котором сырые данные
 func (c Codes) FileName() string {
 	return "../data/standarts/ISO_3166-1.csv"
 }
 
-// FileName - Возвращает имя файла, в котором сырые данные
+// Providers.FileName - Возвращает имя файла, в котором сырые данные
 func (p Providers) FileName() string {
 	return "../data/standarts/providers.csv"
 }

@@ -23,5 +23,8 @@ func main() {
 	fmt.Println(codes["KZ"])
 
 	fmt.Println()
-	fmt.Println(string(contentSms))
+	fmt.Println(string(contentSms[0]))
+	// for _, v := range contentSms {
+	// 	fmt.Print(string(v))
+	// }
 }
