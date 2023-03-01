@@ -2,8 +2,8 @@ package storage
 
 import "diplom/pkg/data"
 
-type Storage map[string]*data.Iso3166
+type Storage map[string]*data.Codes
 
 func New() Storage {
-	return make(map[string]*data.Iso3166)
+	return make(map[string]*data.Codes
 }
