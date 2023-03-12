@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"diplom/pkg/check"
 	"diplom/pkg/simulator"
 	"diplom/pkg/storage"
 )
@@ -19,7 +20,7 @@ func main() {
 	contentNew := s.Get()
 
 	// sms := check.SMS{}
-	s.CheckAndFix(contentSms)
+	check.CheckAndFix(contentSms)
 
 	fmt.Println("Исходный файд")
 	fmt.Println()

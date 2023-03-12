@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func (s *storage.SMS) CheckAndFix(content []byte) {
+func CheckAndFix(content []byte) {
 	scanner := bufio.NewScanner(strings.NewReader(string(content)))
 	scanner.Split(bufio.ScanLines)
 
