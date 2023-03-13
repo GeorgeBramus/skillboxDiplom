@@ -3,28 +3,32 @@ package main
 import (
 	"fmt"
 
-	"diplom/pkg/data"
+	"diplom/pkg/check"
 	"diplom/pkg/simulator"
+	"diplom/pkg/storage"
 )
 
 func main() {
-	// Данные из симулятора для sms-сервиса
+
+	// *** 1 ***
+	// Получим данные из файлов в симуляторе
+
 	simulator := simulator.New()
 	contentSms := simulator.ReadFile("sms.data")
 
-	// Формирование мапы с кодами Alpha-2 по стандарту ISO 3166-1
-	sourceCodes := data.Codes{}
-	codes := data.CreateMap(sourceCodes)
-	// Формируем мапу с именами провайдеров
-	sourceProviders := data.Providers{}
-	providers := data.CreateMap(sourceProviders)
+	s := storage.New()
+	contentNew := s.Get()
 
-	fmt.Println(providers["Topolo"])
-	fmt.Println(codes["KZ"])
+	// sms := check.SMS{}
+	check.CheckAndFix(contentSms)
 
+	fmt.Println("Исходный файд")
 	fmt.Println()
-	fmt.Println(string(contentSms[0]))
-	// for _, v := range contentSms {
-	// 	fmt.Print(string(v))
-	// }
+	fmt.Println(string(contentSms))
+	fmt.Println()
+	fmt.Println("Обработанный")
+	fmt.Println()
+	for _, v := range *contentNew {
+		fmt.Println(v)
+	}
 }

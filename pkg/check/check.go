@@ -2,42 +2,40 @@ package check
 
 import (
 	"bufio"
+	"diplom/pkg/data"
+	"diplom/pkg/storage"
 	"strings"
 )
 
-type SMSData struct {
-	Сountry      string
-	Bandwidth    string
-	ResponseTime string
-	Provider     string
-}
+func CheckAndFix(content []byte) {
+	scanner := bufio.NewScanner(strings.NewReader(string(content)))
+	scanner.Split(bufio.ScanLines)
 
-func checkSms(rawData []string, countFields int, codes, providers map[string]string) []SMSData {
-	var (
-		fields []string
-		data   []SMSData
-	)
-	for _, line := range rawData {
-		fields = strings.Split(line, ";")
-		if len(fields) != countFields {
+	// Формирование мапы с кодами Alpha-2 по стандарту ISO 3166-1
+	sourceCodes := data.Codes{}
+	countries := data.CreateMap(sourceCodes)
+	// Формируем мапу с именами провайдеров
+	sourceProviders := data.Providers{}
+	providers := data.CreateMap(sourceProviders)
+
+	var line []string
+
+	for scanner.Scan() {
+		line = strings.Split(scanner.Text(), ";")
+		country := line[0]
+		bandwidth := line[1]
+		responseTime := line[2]
+		provider := line[3]
+
+		if _, ok := countries[country]; !ok {
 			continue
 		}
-		if _, exists := codes[fields[0]]; !exists {
-			continue
-		}
-		if _, exists := providers[fields[3]]; !exists {
+		if _, ok := providers[provider]; !ok {
 			continue
 		}
 
-		country := fields[0]
-
-		sms := SMSData{
-			Country:      country,
-			Bandwidth:    fields[1],
-			ResponseTime: fields[2],
-			Provider:     fields[3],
-		}
-
-		data = append(data)
+		newMes := storage.NewSMS(country, bandwidth, responseTime, provider)
+		s := storage.New()
+		s.Put(&newMes)
 	}
 }
