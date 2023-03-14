@@ -5,30 +5,23 @@ import (
 
 	"diplom/pkg/check"
 	"diplom/pkg/simulator"
-	"diplom/pkg/storage"
 )
 
 func main() {
 
-	// *** 1 ***
-	// Получим данные из файлов в симуляторе
-
 	simulator := simulator.New()
 	contentSms := simulator.ReadFile("sms.data")
 
-	s := storage.New()
-	contentNew := s.Get()
+	newContentSms := check.CheckAndFix(contentSms)
 
-	// sms := check.SMS{}
-	check.CheckAndFix(contentSms)
-
-	fmt.Println("Исходный файд")
-	fmt.Println()
-	fmt.Println(string(contentSms))
-	fmt.Println()
-	fmt.Println("Обработанный")
-	fmt.Println()
-	for _, v := range *contentNew {
-		fmt.Println(v)
+	for _, sms := range contentSms {
+		fmt.Println(sms)
 	}
+
+	fmt.Println()
+
+	for _, sms := range *newContentSms {
+		fmt.Println(*sms)
+	}
+
 }

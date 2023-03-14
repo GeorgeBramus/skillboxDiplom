@@ -1,31 +1,27 @@
 package check
 
 import (
-	"bufio"
 	"diplom/pkg/data"
 	"diplom/pkg/storage"
 	"strings"
 )
 
-func CheckAndFix(content []byte) {
-	scanner := bufio.NewScanner(strings.NewReader(string(content)))
-	scanner.Split(bufio.ScanLines)
-
-	// Формирование мапы с кодами Alpha-2 по стандарту ISO 3166-1
+func CheckAndFix(content []string) *storage.SMS {
+	// Формирование мапу с кодами Alpha-2 по стандарту ISO 3166-1
 	sourceCodes := data.Codes{}
 	countries := data.CreateMap(sourceCodes)
 	// Формируем мапу с именами провайдеров
 	sourceProviders := data.Providers{}
 	providers := data.CreateMap(sourceProviders)
 
-	var line []string
+	s := storage.New()
 
-	for scanner.Scan() {
-		line = strings.Split(scanner.Text(), ";")
-		country := line[0]
-		bandwidth := line[1]
-		responseTime := line[2]
-		provider := line[3]
+	for _, line := range content {
+		field := strings.Split(line, ";")
+		country := field[0]
+		bandwidth := field[1]
+		responseTime := field[2]
+		provider := field[3]
 
 		if _, ok := countries[country]; !ok {
 			continue
@@ -35,7 +31,9 @@ func CheckAndFix(content []byte) {
 		}
 
 		newMes := storage.NewSMS(country, bandwidth, responseTime, provider)
-		s := storage.New()
 		s.Put(&newMes)
 	}
+
+	return &s
+
 }
