@@ -1,7 +1,9 @@
 package storage
 
+// ***
+// SMS
+
 type SMS []*SMSData
-type MMS []*MMSData
 
 type SMSData struct {
 	Country      string
@@ -9,6 +11,8 @@ type SMSData struct {
 	ResponseTime string
 	Provider     string
 }
+
+type MMS []*MMSData
 
 type MMSData struct {
 	Country      string `json:"country"`

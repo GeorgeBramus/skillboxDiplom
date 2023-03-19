@@ -1,9 +1,10 @@
 package check
 
 import (
+	"strings"
+
 	"diplom/pkg/data"
 	"diplom/pkg/storage"
-	"strings"
 )
 
 func CheckAndFix(content []string) *storage.SMS {
@@ -18,6 +19,11 @@ func CheckAndFix(content []string) *storage.SMS {
 
 	for _, line := range content {
 		field := strings.Split(line, ";")
+
+		if len(field) != 4 {
+			continue
+		}
+
 		country := field[0]
 		bandwidth := field[1]
 		responseTime := field[2]
